@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhriti AI - Next Generation AI Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #6b21a8 0%, #3b0764 100%);
+        }
+        
+        .chat-bubble {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #6b7280;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        
+        .typing-indicator span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+        
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navbar -->
+    <nav class="gradient-bg text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-robot text-2xl text-purple-300"></i>
+                <h1 class="text-2xl font-bold">Dhriti<span class="text-purple-300">AI</span></h1>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#features" class="hover:text-purple-300 transition">Features</a>
+                <a href="#about" class="hover:text-purple-300 transition">About</a>
+                <a href="#pricing" class="hover:text-purple-300 transition">Pricing</a>
+                <a href="#contact" class="hover:text-purple-300 transition">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hidden md:block px-4 py-2 rounded-lg bg-white text-purple-800 font-medium hover:bg-purple-100 transition">Login</a>
+                <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-purple-900 px-4 py-2">
+            <a href="#features" class="block py-2 hover:text-purple-300 transition">Features</a>
+            <a href="#about" class="block py-2 hover:text-purple-300 transition">About</a>
+            <a href="#pricing" class="block py-2 hover:text-purple-300 transition">Pricing</a>
+            <a href="#contact" class="block py-2 hover:text-purple-300 transition">Contact</a>
+            <a href="#" class="block py-2 px-4 my-2 rounded-lg bg-white text-purple-800 font-medium hover:bg-purple-100 transition text-center">Login</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Experience the Power of <span class="text-purple-300">Dhriti AI</span></h1>
+                <p class="text-lg md:text-xl mb-8 text-gray-300">Your intelligent assistant that learns, adapts, and grows with you. Get instant answers, creative suggestions, and expert insights.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button class="px-6 py-3 bg-white text-purple-800 font-bold rounded-lg hover:bg-purple-100 transition transform hover:scale-105">Try Now For Free</button>
+                    <button class="px-6 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-purple-800 transition transform hover:scale-105">See Demo</button>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative">
+                    <div class="chat-bubble bg-white p-6 rounded-3xl rounded-bl-none shadow-xl w-full max-w-md">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white mr-3">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">Dhriti AI</h3>
+                        </div>
+                        <div class="text-gray-700">
+                            <p>Hello! I'm Dhriti, your AI assistant. I can help with code, content, research, analysis, and much more. What can I do for you today?</p>
+                            <div class="typing-indicator flex mt-4">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-4 -right-4 w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white shadow-lg">
+                            <i class="fas fa-microphone text-xl animate-pulse"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Powerful Features</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Discover what makes Dhriti AI stand out from the crowd with these innovative capabilities</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-xl border border-gray-200">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-lightbulb text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Creative Ideation</h3>
+                    <p class="text-gray-600">Generate innovative ideas for your projects, marketing campaigns, or creative writing with just a prompt.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-xl border border-gray-200">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-code text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Code Assistance</h3>
+                    <p class="text-gray-600">Get instant help with programming, debugging, or learning new languages and frameworks.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-xl border border-gray-200">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Data Analysis</h3>
+                    <p class="text-gray-600">Analyze complex data sets, generate insights and visualize information in understandable formats.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-xl border border-gray-200">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-language text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Multilingual Support</h3>
+                    <p class="text-gray-600">Communicate and get responses in multiple languages with accurate translations.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-xl border border-gray-200">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-magic text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Content Creation</h3>
+                    <p class="text-gray-600">Generate high-quality articles, social media posts, emails, and more in seconds.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-xl border border-gray-200">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-brain text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Contextual Memory</h3>
+                    <p class="text-gray-600">Remembers conversation history for more coherent and personalized responses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo AI Section -->
+    <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Try Dhriti AI Now</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Experience the AI assistant that understands and responds just like a human</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6 border-b border-gray-200 bg-gray-50">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white mr-3">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800">Dhriti AI Assistant</h3>
+                    </div>
+                </div>
+                
+                <div class="h-80 overflow-y-auto p-6 space-y-4" id="chat-container">
+                    <div class="flex">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white mr-3 flex-shrink-0">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg rounded-tl-none max-w-prose">
+                            <p class="text-gray-800">Hello! I'm Dhriti, your AI assistant. Ask me anything and I'll do my best to help you. What would you like to know today?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-6 border-t border-gray-200 bg-gray-50">
+                    <div class="flex items-center">
+                        <input type="text" id="user-input" placeholder="Ask me anything..." class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" autocomplete="off">
+                        <button id="send-button" class="ml-4 px-6 py-3 gradient-bg text-white font-medium rounded-lg hover:bg-purple-800 transition"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="flex justify-center mt-3">
+                        <button class="text-xs text-gray-500 hover:text-purple-700 mr-4"><i class="fas fa-microphone mr-1"></i> Voice Input</button>
+                        <button class="text-xs text-gray-500 hover:text-purple-700 mr-4"><i class="fas fa-image mr-1"></i> Image Upload</button>
+                        <button class="text-xs text-gray-500 hover:text-purple-700"><i class="fas fa-file-alt mr-1"></i> Document</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Simple, Transparent Pricing</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Choose the plan that fits your needs. No hidden fees, cancel anytime.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Free Plan -->
+                <div class="border border-gray-200 rounded-xl hover:border-purple-500 hover:shadow-lg transition transform hover:-translate-y-2">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-xl font-bold mb-1 text-gray-800">Starter</h3>
+                        <p class="text-gray-600 mb-4">Ideal for individuals experimenting with AI</p>
+                        <div class="mb-6">
+                            <span class="text-4xl font-bold text-gray-800">$0</span>
+                            <span class="text-gray-600">/month</span>
+                        </div>
+                        <button class="w-full px-4 py-2 border border-purple-600 text-purple-600 font-medium rounded-lg hover:bg-purple-50 transition">Get Started</button>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 10 requests/day</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Basic AI capabilities</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Email support</li>
+                            <li class="flex items-center text-gray-400"><i class="fas fa-times text-red-400 mr-2"></i> No priority access</li>
+                            <li class="flex items-center text-gray-400"><i class="fas fa-times text-red-400 mr-2"></i> Limited memory</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Pro Plan (Featured) -->
+                <div class="border-2 border-purple-500 rounded-xl shadow-lg relative transform -translate-y-4">
+                    <div class="absolute top-0 right-0 bg-purple-500 text-white px-3 py-1 rounded-bl-lg text-xs font-bold">Most Popular</div>
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-xl font-bold mb-1 text-gray-800">Pro</h3>
+                        <p class="text-gray-600 mb-4">For professionals and small businesses</p>
+                        <div class="mb-6">
+                            <span class="text-4xl font-bold text-gray-800">$20</span>
+                            <span class="text-gray-600">/month</span>
+                        </div>
+                        <button class="w-full px-4 py-2 gradient-bg text-white font-medium rounded-lg hover:bg-purple-800 transition">Get Pro Plan</button>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 500 requests/month</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Advanced AI capabilities</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Priority support</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Enhanced memory</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> API access</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Enterprise Plan -->
+                <div class="border border-gray-200 rounded-xl hover:border-purple-500 hover:shadow-lg transition transform hover:-translate-y-2">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-xl font-bold mb-1 text-gray-800">Enterprise</h3>
+                        <p class="text-gray-600 mb-4">For businesses with high-volume needs</p>
+                        <div class="mb-6">
+                            <span class="text-4xl font-bold text-gray-800">$99</span>
+                            <span class="text-gray-600">/month</span>
+                        </div>
+                        <button class="w-full px-4 py-2 border border-purple-600 text-purple-600 font-medium rounded-lg hover:bg-purple-50 transition">Contact Sales</button>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Unlimited requests</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Premium AI capabilities</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 24/7 VIP support</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Full memory & customization</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Dedicated account manager</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">What People Are Saying</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Hear from our satisfied users across different industries</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah J." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Sarah J.</h4>
+                            <p class="text-gray-600 text-sm">Marketing Director</p>
+                        </div>
+                        <div class="ml-auto text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Dhriti AI has transformed our content creation process. We're producing twice as many high-quality blog posts in half the time. The ideas it generates are consistently fresh and relevant."</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Michael T." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Michael T.</h4>
+                            <p class="text-gray-600 text-sm">Software Engineer</p>
+                        </div>
+                        <div class="ml-auto text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"As a developer, I use Dhriti daily for code explanations and debugging. It understands context incredibly well and has saved me countless hours of frustration."</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya K." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Priya K.</h4>
+                            <p class="text-gray-600 text-sm">Small Business Owner</p>
+                        </div>
+                        <div class="ml-auto text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"This AI has become my virtual business partner. From writing product descriptions to analyzing customer feedback, Dhriti helps me compete with much larger companies."</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="px-6 py-3 bg-white text-purple-800 font-bold rounded-lg border border-purple-600 hover:bg-purple-50 transition">See More Testimonials</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Workflow?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of professionals and businesses already using Dhriti AI to save time and boost productivity.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <button class="px-8 py-4 bg-white text-purple-800 font-bold rounded-lg hover:bg-purple-100 transition transform hover:scale-105">Start Free Trial</button>
+                <button class="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-purple-800 transition transform hover:scale-105">Schedule Demo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-robot text-2xl text-purple-400"></i>
+                        <h3 class="text-2xl font-bold text-white">Dhriti<span class="text-purple-400">AI</span></h3>
+                    </div>
+                    <p class="mb-4">The most advanced AI assistant designed to help you work smarter, not harder.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-4">Product</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Features</a></li>
+                        <li><a href="#" class="hover:text-white transition">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white transition">API</a></li>
+                        <li><a href="#" class="hover:text-white transition">Integrations</a></li>
+                        <li><a href="#" class="hover:text-white transition">Roadmap</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition">Press</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition">Community</a></li>
+                        <li><a href="#" class="hover:text-white transition">Tutorials</a></li>
+                        <li><a href="#" class="hover:text-white transition">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="mb-4 md:mb-0">© 2023 Dhriti AI. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Chat functionality
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const message = userInput.value.trim();
+            
+            if (message) {
+                // Add user message to chat
+                addMessageToChat('user', message);
+                userInput.value = '';
+                
+                // Show typing indicator
+                const typingIndicator = document.createElement('div');
+                typingIndicator.className = 'flex';
+                typingIndicator.innerHTML = `
+                    <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white mr-3 flex-shrink-0">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="typing-indicator flex mt-2">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                `;
+                document.getElementById('chat-container').appendChild(typingIndicator);
+                document.getElementById('chat-container').scrollTop = document.getElementById('chat-container').scrollHeight;
+                
+                // Simulate AI response after delay
+                setTimeout(() => {
+                    // Remove typing indicator
+                    document.getElementById('chat-container').removeChild(typingIndicator);
+                    
+                    // Add AI response (in a real app, this would come from your API)
+                    const responses = [
+                        "I'm an AI assistant designed to help with a wide range of tasks. How can I assist you further?",
+                        "Interesting question! Based on my knowledge, I'd suggest considering multiple perspectives on this topic.",
+                        "I can help analyze that for you. Could you provide more specific details about your request?",
+                        "That's a common concern. Many users find that breaking the problem into smaller parts makes it more manageable.",
+                        "I understand what you're asking. Here's some information that might be helpful in your situation."
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessageToChat('ai', randomResponse);
+                }, 1500 + Math.random() * 2000);
+            }
+        }
+
+        function addMessageToChat(sender, message) {
+            const chatContainer = document.getElementById('chat-container');
+            
+            if (sender === 'user') {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'flex justify-end mb-4';
+                messageElement.innerHTML = `
+                    <div class="bg-purple-600 text-white p-4 rounded-lg rounded-tr-none max-w-prose">
+                        <p>${message}</p>
+                    </div>
+                `;
+                chatContainer.appendChild(messageElement);
+            } else {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'flex';
+                messageElement.innerHTML = `
+                    <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white mr-3 flex-shrink-0">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-lg rounded-tl-none max-w-prose">
+                        <p class="text-gray-800">${message}</p>
+                    </div>
+                `;
+                chatContainer.appendChild(messageElement);
+            }
+            
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
